@@ -49,3 +49,10 @@ london_co = {
         "routing": True,
     },
 }
+dev_type = input ('Ведите имя устройства: ')
+name_param_dev = 'Введите параметр устройства ({}): '
+get_keys = dict(london_co[dev_type])
+get_keys = ', '.join(list(get_keys.keys()))
+dev_param = input (name_param_dev.format(get_keys))
+london_co[dev_type].setdefault(dev_param, 'Такого параметра нет')
+print (london_co[dev_type][dev_param])

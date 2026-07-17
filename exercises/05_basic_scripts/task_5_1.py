@@ -46,3 +46,5 @@ london_co = {
         "routing": True,
     },
 }
+dev_type = input('Введите тип устройства: ')
+print (london_co[dev_type])

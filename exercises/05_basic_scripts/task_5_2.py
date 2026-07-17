@@ -30,3 +30,17 @@ Out[1]: '11111111111111111111111111110000'
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+ip_addres =  input ('Введите IP адрес в десятичном формате - 10.1.1.0/24: ')
+ip_addres = (ip_addres.replace ('/', ' .')).split('.')
+ip_addres[-1]=str('1'*int(ip_addres[-1]))+str('0'*(32 - int(ip_addres[-1])))
+template_ip = '''
+Network
+{0:<8}  {1:<8}  {2:<8}  {3:<8}  
+{0:08b}  {1:08b}  {2:08b}  {3:08b}  
+
+Mask
+
+'''
+'template_ip = template_ip.format(int(ip_addres[0]), int(ip_addres[1]), int(ip_addres[2]), int(ip_addres[3]), int(ip_addres[4]))'
+print (template_ip)
+print(ip_addres)
