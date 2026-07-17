@@ -49,3 +49,33 @@ bin_ip = "00001010000000010000000111000011"
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+ip_addres =  input ('Введите IP адрес в десятичном формате - 10.1.1.0/24: ')
+ip_addres = (ip_addres.replace ('/', ' .')).split('.')
+ip_mask = str('1'*(int(ip_addres[-1]))+str('0'*(32 - int(ip_addres[-1]))))
+mask_item = ip_addres.pop(-1)
+ip_addres_bin_template = '''{:08b}{:08b}{:08b}{:08b}'''
+ip_addres_bin = ip_addres_bin_template.format(int(ip_addres[0]), int(ip_addres[1]), int(ip_addres[2]), int(ip_addres[3]))
+ip_mask = [ip_mask[0:8], ip_mask[8:16], ip_mask[16:24], ip_mask[24:32]]
+ip_addres_bin_change = ip_addres_bin[0:int(mask_item)] + ('0'*(32 - int(mask_item)))
+ip_addres = [int(ip_addres_bin_change[0:8], 2), int(ip_addres_bin_change[8:16],2), int(ip_addres_bin_change[16:24],2), int(ip_addres_bin_change[24:32],2)]
+template_network = '''
+Network:
+
+{0:<8}  {1:<8}  {2:<8}  {3:<8}  
+{0:08b}  {1:08b}  {2:08b}  {3:08b}  
+'''
+template_mask = '''
+Mask:
+
+/{}
+{:<8}  {:<8}  {:<8}  {:<8}
+{:<}  {:<}  {:<}  {:<}
+'''
+template_network = template_network.format(int(ip_addres[0]), int(ip_addres[1]), int(ip_addres[2]), int(ip_addres[3]))
+template_mask = template_mask.format (mask_item, int(ip_mask[0], 2), int(ip_mask[1], 2), int(ip_mask[2], 2), int(ip_mask[3],2), ip_mask[0], ip_mask[1], ip_mask[2], ip_mask[3]) 
+
+print (template_network)
+print (template_mask)
+
+
+

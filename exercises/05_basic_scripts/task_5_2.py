@@ -32,15 +32,22 @@ Out[1]: '11111111111111111111111111110000'
 """
 ip_addres =  input ('Введите IP адрес в десятичном формате - 10.1.1.0/24: ')
 ip_addres = (ip_addres.replace ('/', ' .')).split('.')
-ip_addres[-1]=str('1'*int(ip_addres[-1]))+str('0'*(32 - int(ip_addres[-1])))
-template_ip = '''
-Network
+ip_mask = str('1'*int(ip_addres[-1]))+str('0'*(32 - int(ip_addres[-1])))
+ip_mask = [ip_mask[0:8], ip_mask[8:16], ip_mask[16:24], ip_mask[24:32]]
+template_network = '''
+Network:
+
 {0:<8}  {1:<8}  {2:<8}  {3:<8}  
 {0:08b}  {1:08b}  {2:08b}  {3:08b}  
-
-Mask
-
 '''
-'template_ip = template_ip.format(int(ip_addres[0]), int(ip_addres[1]), int(ip_addres[2]), int(ip_addres[3]), int(ip_addres[4]))'
-print (template_ip)
-print(ip_addres)
+template_mask = '''
+Mask:
+
+/{}
+{:<8}  {:<8}  {:<8}  {:<8}
+{:<}  {:<}  {:<}  {:<}
+'''
+template_network = template_network.format(int(ip_addres[0]), int(ip_addres[1]), int(ip_addres[2]), int(ip_addres[3]), int(ip_addres[4]))
+template_mask = template_mask.format (ip_addres[-1], int(ip_mask[0], 2), int(ip_mask[1], 2), int(ip_mask[2], 2), int(ip_mask[3],2), ip_mask[0], ip_mask[1], ip_mask[2], ip_mask[3]) 
+print(template_network)
+print (template_mask)
